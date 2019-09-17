@@ -1,28 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package medicalsoft;
 
-/**
- *
- * @author estudiante
- */
-public class Persona {
-     private  String nombre ="";
-  private String apellido ="";
-  private String fecha_nacimiento ="";
-  private String identificaccion="";
-  private String genero ="";
-  private String direccion="";
-  private  String email ="";
-  private String telefono ="";
-  private String celular ="";
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-    public Persona(String nom, String ape) {
-        this.nombre=nom;
-        this.apellido=ape;
+public class Persona {
+
+    private String nombre = "";
+    private String apellido = "";
+    private String fecha_nacimiento = "";
+    private String identificacion = "";
+    private String genero = "";
+    private String direccion = "";
+    private String email = "";
+    private String telefono = "";
+    private String celular = "";
+
+    public Persona(String nom, String ape, String fec) {     //CONSTRUCTOR
+        this.nombre = nom;
+        this.apellido = ape;
+        this.fecha_nacimiento = fec;
+    }
+
+    public Persona() {
+
     }
 
     public String getNombre() {
@@ -49,12 +55,12 @@ public class Persona {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
-    public String getIdentificaccion() {
-        return identificaccion;
+    public String getIdentificacion() {
+        return identificacion;
     }
 
-    public void setIdentificaccion(String identificaccion) {
-        this.identificaccion = identificaccion;
+    public void setIdentificacion(String identificacion) {
+        this.identificacion = identificacion;
     }
 
     public String getGenero() {
@@ -74,6 +80,21 @@ public class Persona {
     }
 
     public String getEmail() {
+         Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+ 
+        // El email a validar
+        String ema = "luislopez@gmail.com.co";
+ 
+        Matcher mather = pattern.matcher(ema);
+ 
+        if (mather.find() == true) {
+            System.out.println("El email ingresado es válido.");
+        } else {
+            System.out.println("El email ingresado es inválido.");
+        }
+        
         return email;
     }
 
@@ -96,4 +117,27 @@ public class Persona {
     public void setCelular(String celular) {
         this.celular = celular;
     }
+
+
+    public int getEdad() {
+
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fechaNac = LocalDate.parse(this.fecha_nacimiento, fmt);
+        LocalDate ahora = LocalDate.now();
+
+        Period periodo = Period.between(fechaNac, ahora);
+        
+        return periodo.getYears();
+    }
+
+    public boolean validateEmail() {
+
+        return true;
+    }
+
+    public String getFullName() {
+
+        return this.nombre + " " + "" + this.apellido;
+    }
+
 }
