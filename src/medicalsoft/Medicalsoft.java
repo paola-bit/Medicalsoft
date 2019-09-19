@@ -12,11 +12,14 @@ public class Medicalsoft {
         System.out.println(primerMedico.getApellido);*/
         
         Medico medico1 = new Medico();
+        
         medico1.setNombre("Luis");
         medico1.setApellido("Lopez");
         medico1.setFecha_nacimiento("30/11/1999");
+        medico1.setEmail("pacolinam@ul.edu.co");
         
-        System.out.println("El medico "+medico1.getFullName()+", su edad es: "+medico1.getEdad()+"y " +medico1.getEmail());
+        System.out.println("El medico "+medico1.getFullName()+", su edad es: "+medico1.getEdad()+"y " +medico1.getEmail()+"\n"
+        + "Su email es: "+Validacion.getValidar_Email());
         
         
     }
